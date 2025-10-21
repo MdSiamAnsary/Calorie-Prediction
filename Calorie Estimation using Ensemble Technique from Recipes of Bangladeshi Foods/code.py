@@ -1,0 +1,139 @@
+# -*- coding: utf-8 -*-
+
+import pandas as pd
+import numpy as np
+import torch
+from torch import nn
+from torch.utils.data import Dataset
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import Ridge
+from sklearn.metrics import mean_squared_error
+from transformers import (
+    AutoTokenizer,
+    AutoModel,
+    Trainer,
+    TrainingArguments,
+)
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+MODEL_NAMES = [
+    "bert-base-uncased",
+    "roberta-base",
+    "distilbert-base-uncased"
+]
+
+df = pd.read_csv("Dataset.csv")
+
+df = df[['Recipe', 'Approximate Calorie per Serving']].dropna()
+
+train_texts, temp_texts, train_labels, temp_labels = train_test_split(df['Recipe'].tolist(), df['Approximate Calorie per Serving'].values, test_size=0.3, random_state=42)
+val_texts, test_texts, val_labels, test_labels = train_test_split(temp_texts, temp_labels, test_size=0.5, random_state=42)
+
+class RecipeDataset(Dataset):
+    def __init__(self, encodings, labels):
+        self.encodings = encodings
+        self.labels = torch.tensor(labels, dtype=torch.float32)
+
+    def __len__(self):
+        return len(self.labels)
+
+    def __getitem__(self, idx):
+        item = {k: torch.tensor(v[idx]) for k, v in self.encodings.items()}
+        item["labels"] = self.labels[idx]
+        return item
+
+class TransformerRegressor(nn.Module):
+    def __init__(self, model_name):
+        super().__init__()
+        self.transformer = AutoModel.from_pretrained(model_name)
+        hidden_size = self.transformer.config.hidden_size
+        self.regressor = nn.Linear(hidden_size, 1)
+
+    def forward(self, input_ids, attention_mask=None, token_type_ids=None, labels=None):
+        outputs = self.transformer(input_ids=input_ids, attention_mask=attention_mask)
+        if hasattr(outputs, 'pooler_output'):
+            cls_output = outputs.pooler_output
+        else:
+            cls_output = outputs.last_hidden_state[:, 0]
+        preds = self.regressor(cls_output).squeeze(-1)
+        loss = None
+        if labels is not None:
+            loss = nn.MSELoss()(preds, labels)
+        return {"loss": loss, "logits": preds}
+
+val_preds_list, test_preds_list = [], []
+
+pip install --upgrade transformers
+
+from transformers import TrainingArguments
+
+import os
+os.environ["WANDB_DISABLED"] = "true"
+
+for model_name in MODEL_NAMES:
+    print(f"\n\n Training {model_name}\n\n")
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+    train_encodings = tokenizer(train_texts, truncation=True, padding=True, max_length=512)
+    val_encodings = tokenizer(val_texts, truncation=True, padding=True, max_length=512)
+    test_encodings = tokenizer(test_texts, truncation=True, padding=True, max_length=512)
+
+    train_dataset = RecipeDataset(train_encodings, train_labels)
+    val_dataset = RecipeDataset(val_encodings, val_labels)
+    test_dataset = RecipeDataset(test_encodings, test_labels)
+
+    model = TransformerRegressor(model_name).to(device)
+
+    training_args = TrainingArguments(
+      output_dir="./results",
+      per_device_train_batch_size=16,
+      per_device_eval_batch_size=16,
+      num_train_epochs=3,
+      weight_decay=0.01,
+      logging_dir="./logs",
+      logging_steps=500
+    )
+
+    trainer = Trainer(
+      model=model,
+      args=training_args,
+      train_dataset=train_dataset,
+      eval_dataset=val_dataset
+    )
+
+    trainer.train()
+
+    trainer.evaluate()
+
+    val_preds = trainer.predict(val_dataset).predictions
+    test_preds = trainer.predict(test_dataset).predictions
+
+    val_preds_list.append(val_preds)
+    test_preds_list.append(test_preds)
+
+X_val_stack = np.stack(val_preds_list, axis=1)
+X_test_stack = np.stack(test_preds_list, axis=1)
+
+meta_model = Ridge()
+meta_model.fit(X_val_stack, val_labels)
+stacked_preds = meta_model.predict(X_test_stack)
+
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+
+def evaluate_regression(true, predicted):
+    mse = mean_squared_error(true, predicted)
+    rmse = np.sqrt(mse)
+    mae = mean_absolute_error(true, predicted)
+    r2 = r2_score(true, predicted)
+    mape = np.mean(np.abs((true - predicted) / (true + 1e-8))) * 100
+
+    print("\nEvaluation Metrics:")
+    print(f"MSE  (Mean Squared Error):      {mse:.2f}")
+    print(f"RMSE (Root MSE):                {rmse:.2f}")
+    print(f"MAE  (Mean Absolute Error):     {mae:.2f}")
+    print(f"R²   (R-squared):                {r2:.4f}")
+    print(f"MAPE (Mean Absolute % Error):   {mape:.2f}%")
+
+evaluate_regression(test_labels, stacked_preds)
+
