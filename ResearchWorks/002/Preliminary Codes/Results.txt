@@ -1,0 +1,268 @@
+
+===== Fold 1/5 =====
+Loading weights: 100%
+ 197/197 [00:00<00:00, 371.48it/s, Materializing param=encoder.layer.11.output.dense.weight]
+RobertaModel LOAD REPORT from: roberta-base
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+pooler.dense.bias               | MISSING    | 
+pooler.dense.weight             | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+ [1250/1250 07:50, Epoch 10/10]
+Step	Training Loss
+100	0.344541
+200	0.128179
+300	0.070568
+400	0.058190
+500	0.035788
+600	0.024218
+700	0.021537
+800	0.017396
+900	0.012223
+1000	0.010291
+1100	0.007502
+1200	0.004598
+Fold 1 → RMSE: 31.11, MAE: 18.96, R²: 0.920, MAPE: 6.14%
+
+===== Fold 2/5 =====
+Loading weights: 100%
+ 197/197 [00:00<00:00, 715.40it/s, Materializing param=encoder.layer.11.output.dense.weight]
+RobertaModel LOAD REPORT from: roberta-base
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+pooler.dense.bias               | MISSING    | 
+pooler.dense.weight             | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+ [1250/1250 07:50, Epoch 10/10]
+Step	Training Loss
+100	0.388992
+200	0.146980
+300	0.087738
+400	0.055793
+500	0.043492
+600	0.027944
+700	0.019879
+800	0.017519
+900	0.012154
+1000	0.009762
+1100	0.006932
+1200	0.005512
+Fold 2 → RMSE: 30.27, MAE: 18.28, R²: 0.930, MAPE: 5.37%
+
+===== Fold 3/5 =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%
+ 197/197 [00:00<00:00, 610.38it/s, Materializing param=encoder.layer.11.output.dense.weight]
+RobertaModel LOAD REPORT from: roberta-base
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+pooler.dense.bias               | MISSING    | 
+pooler.dense.weight             | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+ [1250/1250 07:50, Epoch 10/10]
+Step	Training Loss
+100	0.366566
+200	0.142117
+300	0.083898
+400	0.058118
+500	0.044924
+600	0.028300
+700	0.020336
+800	0.014250
+900	0.010636
+1000	0.008234
+1100	0.005952
+1200	0.004222
+Fold 3 → RMSE: 24.96, MAE: 17.98, R²: 0.944, MAPE: 5.79%
+
+===== Fold 4/5 =====
+Loading weights: 100%
+ 197/197 [00:00<00:00, 635.24it/s, Materializing param=encoder.layer.11.output.dense.weight]
+RobertaModel LOAD REPORT from: roberta-base
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+pooler.dense.bias               | MISSING    | 
+pooler.dense.weight             | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+ [1250/1250 07:50, Epoch 10/10]
+Step	Training Loss
+100	0.362996
+200	0.132954
+300	0.079147
+400	0.045961
+500	0.037641
+600	0.024336
+700	0.021053
+800	0.014669
+900	0.012309
+1000	0.008788
+1100	0.006633
+1200	0.005383
+Fold 4 → RMSE: 24.68, MAE: 16.85, R²: 0.949, MAPE: 5.22%
+
+===== Fold 5/5 =====
+Loading weights: 100%
+ 197/197 [00:00<00:00, 657.45it/s, Materializing param=encoder.layer.11.output.dense.weight]
+RobertaModel LOAD REPORT from: roberta-base
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+pooler.dense.bias               | MISSING    | 
+pooler.dense.weight             | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+ [1250/1250 07:50, Epoch 10/10]
+Step	Training Loss
+100	0.369766
+200	0.153186
+300	0.081994
+400	0.055862
+500	0.039897
+600	0.028164
+700	0.019698
+800	0.014241
+900	0.012457
+1000	0.008482
+1100	0.006742
+1200	0.005005
+Fold 5 → RMSE: 28.75, MAE: 18.00, R²: 0.925, MAPE: 6.15%
+
+
+===== Cross-Validation Results =====
+RMSE : 27.95 ± 2.67
+MAE  : 18.01 ± 0.68
+R²   : 0.934
+MAPE : 5.73%
+
+
+
+Baseline 1 Results:
+
+===== Fold 1 =====
+RMSE: 35.63, MAE: 24.46, R²: 0.895, MAPE: 8.55%
+
+===== Fold 2 =====
+RMSE: 36.06, MAE: 22.48, R²: 0.901, MAPE: 7.82%
+
+===== Fold 3 =====
+RMSE: 31.22, MAE: 22.12, R²: 0.913, MAPE: 8.70%
+
+===== Fold 4 =====
+RMSE: 30.07, MAE: 21.68, R²: 0.924, MAPE: 7.78%
+
+===== Fold 5 =====
+RMSE: 35.52, MAE: 24.07, R²: 0.885, MAPE: 8.84%
+
+===== TF-IDF + Ridge (CV Results) =====
+RMSE : 33.70 ± 2.53
+MAE  : 22.96 ± 1.10
+R²   : 0.904
+MAPE : 8.34%
+
+Baseline 2 Results:
+
+===== Fold 1 =====
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.009591 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 97917
+[LightGBM] [Info] Number of data points in the train set: 996, number of used features: 384
+[LightGBM] [Info] Start training from score 323.694779
+/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+RMSE: 50.50, MAE: 35.38, R²: 0.789, MAPE: 12.18%
+
+===== Fold 2 =====
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.005177 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 97919
+[LightGBM] [Info] Number of data points in the train set: 996, number of used features: 384
+[LightGBM] [Info] Start training from score 325.481928
+/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+RMSE: 49.96, MAE: 33.86, R²: 0.810, MAPE: 11.17%
+
+===== Fold 3 =====
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.008084 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 97918
+[LightGBM] [Info] Number of data points in the train set: 996, number of used features: 384
+[LightGBM] [Info] Start training from score 329.011044
+/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+RMSE: 45.38, MAE: 32.92, R²: 0.816, MAPE: 12.85%
+
+===== Fold 4 =====
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.004536 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 97919
+[LightGBM] [Info] Number of data points in the train set: 996, number of used features: 384
+[LightGBM] [Info] Start training from score 326.882530
+/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+RMSE: 41.16, MAE: 30.40, R²: 0.858, MAPE: 10.46%
+
+===== Fold 5 =====
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.004524 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 97920
+[LightGBM] [Info] Number of data points in the train set: 996, number of used features: 384
+[LightGBM] [Info] Start training from score 328.945783
+RMSE: 46.04, MAE: 33.26, R²: 0.807, MAPE: 11.85%
+
+===== Sentence-BERT + LightGBM (CV Results) =====
+RMSE : 46.61 ± 3.40
+MAE  : 33.17 ± 1.62
+R²   : 0.816
+MAPE : 11.70%
+
+
